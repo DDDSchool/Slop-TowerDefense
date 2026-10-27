@@ -8,13 +8,18 @@ public class WaveSpawner : MonoBehaviour {
     public float timeBetweenWaves = 5f;
     private int wave = 0;
 
-    void Start() { StartCoroutine(SpawnWaves()); }
+    void Start() 
+    {
+        StartCoroutine(SpawnWaves());
+    }
 
-    IEnumerator SpawnWaves() {
-        while (true) {
-            wave++;
-            int count = wave + Random.Range(1, 4); //wave add
-            for (int i = 0; i < count; i++) {
+    IEnumerator SpawnWaves() 
+    {
+        while (true) 
+        {
+            wave += Random.Range(1, 4); //wave add
+            for (int i = 0; i < wave; i++)
+            {
                 Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
                 yield return new WaitForSeconds(timeBetweenEnemies);
             }
