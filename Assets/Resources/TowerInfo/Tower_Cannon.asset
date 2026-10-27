@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ef459893551ad4999783a246667158, type: 3}
+  m_Name: Tower_Cannon
+  m_EditorClassIdentifier: Assembly-CSharp::TowerConfigs
+  towerName: Untitled
+  towerLevelConfigs:
+  - level: 1
+    tower: {fileID: 8298805404934109765, guid: b341de55b1176cd4b95a790ac01fe5c9, type: 3}
