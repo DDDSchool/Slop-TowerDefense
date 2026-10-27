@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class TowerMangeren : MonoBehaviour
@@ -15,44 +17,70 @@ public class TowerMangeren : MonoBehaviour
         public RawImage image;
     }
 
+    [Serializable]
+    private class TowerUpgradeGui
+    {
+        public GameObject frame;
+        public RawImage showcase;
+        public TextMeshProUGUI name;
+        public TextMeshProUGUI stats;
+        public TextMeshProUGUI buttonText;
+        public Button upgradeButton;
+    }
+
+    //enums
+    private enum SelectState
+    {
+        none,
+        placing,
+        upgrade
+    }
+
     [Header("Canvas Settings")]
     [SerializeField] private TowerSelectButtonConfigs[] towerSelectButtons;
+    [SerializeField] private TowerUpgradeGui upgradeGui;
+
+    [Header("other...")]
+    [SerializeField] private GameObject rangeRadiusExample;
+    [SerializeField] private GameObject selectRadiusExample;
 
     private List<Tower> towersInGame = new();
     private TowerConfigs[] towerConfigs;
-    private Dictionary<TowerConfigs, Dictionary<int, GameObject>> towersLevelTowers = new();
-    private bool placingDown = false;
+    private Vector3 mouseWorldPPosition;
+    private int cantSpawnLayer;
+    private SpriteRenderer rangeRadiusObject;
+    private SpriteRenderer selectRadiusObject;
+    private SelectState selectState = SelectState.none;
+
     private TowerConfigs selectedPlacingTowerConfig;
     private Collider selectedPlacingTowerCollider;
     private Tower selectedPlacingTowerScript;
-    private Vector3 mouseWorldPPosition;
-    private int cantSpawnLayer;
+
+    private GameObject selectedUpgradeTower = null;
 
     //configs
     const float mouseRayDis = 10f;
     const float placingDownYPosition = .5f;
+    const float overlapAlpha = .4f;
     const string towerTag = "Tower";
+    const int maxTowerLevel = 3;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        towerConfigs = Resources.LoadAll<TowerConfigs>("TowerInfo");
-        foreach (TowerConfigs towerConfig in towerConfigs)
-        {
-            towersLevelTowers.Add(towerConfig, towerConfig.GetTowerLevels());
-        }
-
         //set up the buttons
         foreach (TowerSelectButtonConfigs info in towerSelectButtons)
         {
             info.button.onClick.AddListener(() => SelectPlaceTower(info.tower));
             
-            GameObject level1Tower = towersLevelTowers[info.tower][1];
+            GameObject level1Tower = info.tower.towerlevels[1].tower;
             Texture2D sprite = PrefabUtility.GetIconForGameObject(level1Tower);
             info.image.texture = sprite;
         }
 
         cantSpawnLayer = LayerMask.GetMask("Can't Fit Tower");
+        rangeRadiusObject = Instantiate(rangeRadiusExample, transform).GetComponent<SpriteRenderer>();
+        selectRadiusObject = Instantiate(selectRadiusExample, transform).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -60,7 +88,7 @@ public class TowerMangeren : MonoBehaviour
     {
         GetMousePosition();
 
-        if (placingDown) PlaceDownTower();
+        if (selectState == SelectState.placing) PlaceDownTower();
         else TrySelectingTower();
     }
 
@@ -77,21 +105,29 @@ public class TowerMangeren : MonoBehaviour
     {   
         Vector3 targetPosition = MakeIt2DPosition(mouseWorldPPosition);
         selectedPlacingTowerScript.transform.position = targetPosition;
+        rangeRadiusObject.transform.position = targetPosition;
         //look or there is something in the way
         Collider[] hits = Physics.OverlapBox(targetPosition, selectedPlacingTowerCollider.bounds.size, Quaternion.identity, cantSpawnLayer);
 
         if (hits.Length != 0)
         {
             print("make it red");
+            Color overlapColor = Color.red;
+            overlapColor.a = overlapAlpha;
+            rangeRadiusObject.color = overlapColor;
             return;
         }
 
-        if (!Input.GetMouseButtonDown(0)) return;
+        Color color = Color.black;
+        color.a = overlapAlpha;
+        rangeRadiusObject.color = color;
+        if (!OnMouseWorldClick()) return;
 
-        placingDown = false;
+        selectState = SelectState.none;
         selectedPlacingTowerScript.enabled = true;
         selectedPlacingTowerScript = null;
         selectedPlacingTowerCollider.enabled = true;
+        rangeRadiusObject.enabled = false;
 
         Vector3 MakeIt2DPosition(Vector3 target)
         {
@@ -106,12 +142,15 @@ public class TowerMangeren : MonoBehaviour
             Destroy(selectedPlacingTowerScript.gameObject);
             selectedPlacingTowerScript = null;
         }
-        if (placingDown && tower == selectedPlacingTowerScript) {placingDown = false; return;}
+        if (selectState == SelectState.placing && tower == selectedPlacingTowerScript) {selectState = SelectState.none; return;}
 
-        placingDown = true;
+        selectState = SelectState.placing;
         selectedPlacingTowerConfig = tower;
-        selectedPlacingTowerScript = Instantiate(towersLevelTowers[tower][1], transform).GetComponent<Tower>();
+        selectedPlacingTowerScript = Instantiate(tower.towerlevels[1].tower, transform).GetComponent<Tower>();
+        selectedPlacingTowerScript.towerConfigs = tower;
         selectedPlacingTowerCollider = selectedPlacingTowerScript.GetComponent<Collider>();
+        rangeRadiusObject.transform.localScale = Vector3.one * selectedPlacingTowerScript.range * 2;
+        rangeRadiusObject.enabled = true;
     }
     #endregion
 
@@ -119,14 +158,80 @@ public class TowerMangeren : MonoBehaviour
     void TrySelectingTower()
     {
         bool succes = Physics.Raycast(mouseWorldPPosition + Vector3.up * 2, Vector3.down, out RaycastHit hit, mouseRayDis, cantSpawnLayer);
-        if (!succes || !hit.transform.CompareTag(towerTag) || !Input.GetMouseButtonDown(0)) return;
+        bool haveClick = OnMouseWorldClick();
+        if (!succes || !hit.transform.CompareTag(towerTag))
+        {
+            selectRadiusObject.enabled = false;
+            if (haveClick) DeselectTowerUpgrade();
+            return;
+        }
+        
+        selectRadiusObject.transform.position = hit.transform.position;
+        selectRadiusObject.enabled = true;
 
-        print($"selected {hit.transform.gameObject}");
+        if (!haveClick) return;
+
+        if (selectedUpgradeTower != hit.transform.gameObject) SelectTowerUpgrade(hit.transform.GetComponent<Tower>());
+        else DeselectTowerUpgrade();
     }
 
-    void SelectTowerUpgrade()
+    void SelectTowerUpgrade(Tower tower)
     {
+        selectState = SelectState.upgrade;
+        selectedUpgradeTower = tower.gameObject;
+        TowerConfigs configs = tower.towerConfigs;
+
+        upgradeGui.stats.text = tower.GetStatsInfo();
+        upgradeGui.name.text = configs.towerName;
+        Texture2D sprite = PrefabUtility.GetIconForGameObject(tower.gameObject);
+        upgradeGui.showcase.texture = sprite;
+        upgradeGui.frame.SetActive(true);
+
+        //get next level value for showcase
+        upgradeGui.upgradeButton.onClick.RemoveAllListeners();
         
+        if (tower.level != maxTowerLevel)
+        {
+            upgradeGui.buttonText.text = $"Upgrade: cost{configs.towerlevels[tower.level + 1].cost}";
+            upgradeGui.upgradeButton.onClick.AddListener(() => UpgradeTower(tower));
+        }
+        else upgradeGui.buttonText.text = "Maxed Upgraded";
+
+        rangeRadiusObject.transform.localScale = Vector3.one * tower.range * 2;
+        rangeRadiusObject.transform.position = tower.transform.position;
+        rangeRadiusObject.enabled = true;
+    }
+
+    void DeselectTowerUpgrade()
+    {
+        selectState = SelectState.none;
+        selectedUpgradeTower = null;
+        upgradeGui.frame.SetActive(false);
+        rangeRadiusObject.enabled = false;
+    }
+
+    void UpgradeTower(Tower tower)
+    {
+        TowerConfigs configs = tower.towerConfigs;
+        GameObject newObject = configs.towerlevels[tower.level + 1].tower;
+        Vector3 spawnPosition = tower.transform.position;
+        Destroy(tower.gameObject);
+
+        newObject = Instantiate(newObject, spawnPosition, Quaternion.identity, transform);
+        selectedUpgradeTower = newObject;
+        newObject.GetComponent<Collider>().enabled = true;
+        Tower newTower = newObject.GetComponent<Tower>();
+        newTower.towerConfigs = configs;
+        newTower.enabled = true;
+
+        SelectTowerUpgrade(newTower);
+    }
+    #endregion
+
+    #region helper function
+    bool OnMouseWorldClick()
+    {
+        return (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject());
     }
     #endregion
 }

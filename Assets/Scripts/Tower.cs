@@ -19,6 +19,7 @@ public class Tower : MonoBehaviour
     [SerializeField] protected Transform shootPivit;
 
     [HideInInspector] public FightMode fightMode = FightMode.random;
+    [HideInInspector] public TowerConfigs towerConfigs;
 
     protected float attackCurrentCooldown = 0;
     protected Vector3 enemieCheckPosition;
@@ -70,6 +71,21 @@ public class Tower : MonoBehaviour
     protected virtual void OnHit(Enemy enemy)
     {
         enemy.health -= damage;
+    }
+
+    public virtual string GetStatsInfo()
+    {
+        bool succes = towerConfigs.towerlevels.TryGetValue(level + 1, out TowerConfigs.TowerLevelConfigs levelConfigs); //for now
+
+        if (succes)
+        {
+            Tower newTower = levelConfigs.tower.GetComponent<Tower>(); //for now;
+            string statsInfo = $"Damage: {damage} > {newTower.damage}\n Range: {range} > {newTower.range}\n AttackSpeed: {attackSpeed} > {newTower.attackSpeed}";
+            return statsInfo;
+        }
+
+        string maxStatsInfo = $"Damage: {damage} > {damage}\n Range: {range} > {range}\n AttackSpeed: {attackSpeed} > {attackSpeed}";
+        return maxStatsInfo;
     }
 
     protected void OnDrawGizmos()

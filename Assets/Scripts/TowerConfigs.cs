@@ -9,6 +9,7 @@ public class TowerConfigs : ScriptableObject
     public class TowerLevelConfigs
     {
         public int level;
+        public int cost;
         public GameObject tower;
     }
 
@@ -17,16 +18,16 @@ public class TowerConfigs : ScriptableObject
     
     [Header("Level configs")]
     [SerializeField] private TowerLevelConfigs[] towerLevelConfigs;
+    
+    [HideInInspector] public Dictionary<int, TowerLevelConfigs> towerlevels;
 
-    public Dictionary<int, GameObject> GetTowerLevels()
+    public void ResetTowerLevels()
     {
-        Dictionary<int, GameObject> towerLevels = new();
+        towerlevels = new();
 
         foreach (TowerLevelConfigs levelConfigs in towerLevelConfigs)
         {
-            towerLevels.Add(levelConfigs.level, levelConfigs.tower);
+            towerlevels.Add(levelConfigs.level, levelConfigs);
         }
-
-        return towerLevels;
     }
 }

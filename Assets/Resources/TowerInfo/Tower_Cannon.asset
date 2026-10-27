@@ -15,4 +15,11 @@ MonoBehaviour:
   towerName: Untitled
   towerLevelConfigs:
   - level: 1
+    cost: 0
     tower: {fileID: 8298805404934109765, guid: b341de55b1176cd4b95a790ac01fe5c9, type: 3}
+  - level: 2
+    cost: 20
+    tower: {fileID: 8298805404934109765, guid: 2032a10a009e6a04a856e26dff9ba4fc, type: 3}
+  - level: 3
+    cost: 200
+    tower: {fileID: 8298805404934109765, guid: 9c53cac565380ae41a048c6ce79bf3f1, type: 3}
