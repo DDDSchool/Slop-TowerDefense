@@ -1,3 +1,5 @@
+using DG.Tweening;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,15 +16,20 @@ public class Tower : MonoBehaviour
     public int damage;
     public float range;
     public float attackSpeed;
+    public float projectileSpeed = 20;
+    public int Piercing = 1;
 
     //visuale
     [SerializeField] protected Transform shootPivit;
+    [SerializeField] protected Transform towerRotation;
+    [SerializeField] protected GameObject projectile;
 
     [HideInInspector] public FightMode fightMode = FightMode.random;
     [HideInInspector] public TowerConfigs towerConfigs;
 
     protected float attackCurrentCooldown = 0;
     protected Vector3 enemieCheckPosition;
+    protected quaternion normalTowerRotation;
     
     //configs
     protected const float enemieCheckYPos = 1;
@@ -33,6 +40,7 @@ public class Tower : MonoBehaviour
     {
         enemieCheckPosition = transform.position;
         enemieCheckPosition.y = enemieCheckYPos;
+        normalTowerRotation = towerRotation.rotation;
 
         enemieLayer = LayerMask.GetMask("enemy");
     }
@@ -62,13 +70,31 @@ public class Tower : MonoBehaviour
 
         if (fightMode == FightMode.random)
         {
-            int randomEnemie = Random.Range(0, hits.Length);
-            Enemy enemyScript = hits[randomEnemie].GetComponent<Enemy>();
-            OnHit(enemyScript);
+            int randomEnemie = UnityEngine.Random.Range(0, hits.Length);
+            Transform enemyTarget = hits[randomEnemie].transform;
+            FireProjectile(enemyTarget);
         }
     }
 
-    protected virtual void OnHit(Enemy enemy)
+    protected virtual void FireProjectile(Transform enemyTarget)
+    {
+        Vector3 spawnPosition = new Vector3(shootPivit.position.x, 1, shootPivit.position.z);
+        Vector3 targetPosition = new Vector3(enemyTarget.position.x, 1, enemyTarget.position.z);
+        targetPosition = (targetPosition - spawnPosition).normalized * range + spawnPosition;
+        towerRotation.rotation = Quaternion.LookRotation(targetPosition - towerRotation.position) * normalTowerRotation;
+
+        GameObject newProjectile = Instantiate(projectile, spawnPosition, towerRotation.rotation);
+        Projectile projectileScript = newProjectile.GetComponent<Projectile>();
+        
+        projectileScript.tower = this;
+        projectileScript.life = Piercing;
+        float duration = (spawnPosition - targetPosition).magnitude / projectileSpeed;
+        newProjectile.transform.DOMove(targetPosition, duration)
+         .SetAutoKill(false)
+         .OnComplete(() => Destroy(newProjectile));
+    }
+
+    public virtual void OnHit(Enemy enemy)
     {
         enemy.health -= damage;
     }
