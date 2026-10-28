@@ -15,6 +15,7 @@ public class TowerMangeren : MonoBehaviour
         public Button button;
         public TowerConfigs tower;
         public RawImage image;
+        public TextMeshProUGUI cost;
     }
 
     [Serializable]
@@ -76,6 +77,7 @@ public class TowerMangeren : MonoBehaviour
             GameObject level1Tower = info.tower.towerlevels[1].tower;
             Texture2D sprite = PrefabUtility.GetIconForGameObject(level1Tower);
             info.image.texture = sprite;
+            info.cost.text = $"{info.tower.towerlevels[1].cost}";
         }
 
         cantSpawnLayer = LayerMask.GetMask("Can't Fit Tower");
@@ -98,6 +100,12 @@ public class TowerMangeren : MonoBehaviour
         Plane plane = new Plane(Vector3.up, 0);
         if (!plane.Raycast(ray, out float enter)) return;
         mouseWorldPPosition = ray.GetPoint(enter);
+    }
+
+    //hardcoded ye
+    public void ToggleSpeed()
+    {
+        Time.timeScale = Time.timeScale == 1? 2 : 1;
     }
 
     #region Placing/Moving Towers

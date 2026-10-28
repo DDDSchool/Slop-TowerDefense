@@ -8,6 +8,9 @@ public class Tower : MonoBehaviour
     public enum FightMode
     {
         closest,
+        farthest,
+        first,
+        last,
         random
     }
 
