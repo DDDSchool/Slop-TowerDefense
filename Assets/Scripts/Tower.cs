@@ -26,6 +26,9 @@ public class Tower : MonoBehaviour
     [SerializeField] protected Transform shootPivit;
     [SerializeField] protected Transform towerRotation;
     [SerializeField] protected GameObject projectile;
+    [SerializeField] protected GameObject hitVfx;
+    [SerializeField] protected AudioSource sfxPlayer;
+    [SerializeField] protected AudioClip hitSfx;
 
     [HideInInspector] public FightMode fightMode = FightMode.random;
     [HideInInspector] public TowerConfigs towerConfigs;
@@ -71,12 +74,9 @@ public class Tower : MonoBehaviour
         if (hits.Length == 0) return;
         attackCurrentCooldown = 0;
 
-        if (fightMode == FightMode.random)
-        {
-            int randomEnemie = UnityEngine.Random.Range(0, hits.Length);
-            Transform enemyTarget = hits[randomEnemie].transform;
-            FireProjectile(enemyTarget);
-        }
+        int randomEnemie = UnityEngine.Random.Range(0, hits.Length);
+        Transform enemyTarget = hits[randomEnemie].transform;
+        FireProjectile(enemyTarget);
     }
 
     protected virtual void FireProjectile(Transform enemyTarget)
@@ -100,6 +100,12 @@ public class Tower : MonoBehaviour
     public virtual void OnHit(Enemy enemy)
     {
         enemy.health -= damage;
+
+        GameObject vfxObject = Instantiate(hitVfx, enemy.transform);
+        vfxObject.transform.localPosition = Vector3.zero;
+        Destroy(vfxObject, .6f); //fast
+
+        sfxPlayer.PlayOneShot(hitSfx);
     }
 
     public virtual string GetStatsInfo()

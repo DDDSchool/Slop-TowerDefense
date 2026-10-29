@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8ef459893551ad4999783a246667158, type: 3}
   m_Name: Tower_Cannon
   m_EditorClassIdentifier: Assembly-CSharp::TowerConfigs
-  towerName: Untitled
+  towerName: Cannon
+  icon: {fileID: 21300000, guid: bfedb6c3f8d6b684cb8cb2b8b8505312, type: 3}
   towerLevelConfigs:
   - level: 1
     cost: 0

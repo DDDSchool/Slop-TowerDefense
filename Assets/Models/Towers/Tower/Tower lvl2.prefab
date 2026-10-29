@@ -198,7 +198,8 @@ MonoBehaviour:
   Piercing: 1
   shootPivit: {fileID: 3165287017566567185}
   towerRotation: {fileID: 6067291831729897249}
-  projectile: {fileID: 0}
+  projectile: {fileID: 784855029829344946, guid: 87a85cf1421df1f45be0c9ca8ba0f9a1, type: 3}
+  hitVfx: {fileID: 6262227551153472316, guid: 9201d230930b8304c814c6d673a2850f, type: 3}
   fightMode: 1
   towerConfigs: {fileID: 0}
 --- !u!65 &4378593537204621037

@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7784832330654389347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4962420250163265649}
+  - component: {fileID: 5421979090678196937}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4962420250163265649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784832330654389347}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 21.857597, y: -1.6666697, z: 9.934265}
+  m_LocalScale: {x: 3.333333, y: 3.333333, z: 3.333333}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8674099077811544319}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &5421979090678196937
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7784832330654389347}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24300002, guid: c90eaa9dad9c2514ab957e5461884e0e, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &6033100269944756426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,42 +294,22 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6067291831729897249}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4962420250163265649}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8035479745403244791}
+      addedObject: {fileID: 4378593537204621037}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4378593537204621037}
+      addedObject: {fileID: 8221065140693267146}
   m_SourcePrefab: {fileID: 100100000, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
 --- !u!1 &8298805404934109765 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}
   m_PrefabInstance: {fileID: 9217230551872522004}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8035479745403244791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8298805404934109765}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fae1a99860dce2e45ade6df2e1ffe65c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Tower
-  level: 1
-  damage: 2
-  range: 5
-  attackSpeed: 2
-  projectileSpeed: 20
-  Piercing: 1
-  shootPivit: {fileID: 3165287017566567185}
-  towerRotation: {fileID: 6067291831729897249}
-  projectile: {fileID: 784855029829344946, guid: 87a85cf1421df1f45be0c9ca8ba0f9a1, type: 3}
-  fightMode: 1
-  towerConfigs: {fileID: 0}
 --- !u!65 &4378593537204621037
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -222,6 +331,34 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 5.568292, y: 2, z: 5.568292}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8221065140693267146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8298805404934109765}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c46f2c4a9723c1f4eb781b1f90903834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowerCannon
+  level: 1
+  damage: 2
+  range: 5
+  attackSpeed: 2
+  projectileSpeed: 20
+  Piercing: 1
+  shootPivit: {fileID: 3165287017566567185}
+  towerRotation: {fileID: 6067291831729897249}
+  projectile: {fileID: 784855029829344946, guid: 87a85cf1421df1f45be0c9ca8ba0f9a1, type: 3}
+  hitVfx: {fileID: 6262227551153472316, guid: 9201d230930b8304c814c6d673a2850f, type: 3}
+  sfxPlayer: {fileID: 5421979090678196937}
+  hitSfx: {fileID: 8300000, guid: 2205b9e132f7dc44492f6234a7c4ac40, type: 3}
+  fightMode: 4
+  towerConfigs: {fileID: 0}
+  aoeRadius: 2
+  explosionVfx: {fileID: 1994885275701328011, guid: 97ab2f08f1bd4774188e16187c405ff1, type: 3}
 --- !u!4 &8674099077811544319 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 42fc69b4f47cae04db3ceafa56b20e93, type: 3}

@@ -1,2 +1,18 @@
 fileFormatVersion: 2
 guid: fae1a99860dce2e45ade6df2e1ffe65c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shootPivit: {instanceID: 0}
+  - towerRotation: {instanceID: 0}
+  - projectile: {instanceID: 0}
+  - hitVfx: {instanceID: 0}
+  - sfxPlayer: {instanceID: 0}
+  - hitSfx: {fileID: 8300000, guid: 2205b9e132f7dc44492f6234a7c4ac40, type: 3}
+  - towerConfigs: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

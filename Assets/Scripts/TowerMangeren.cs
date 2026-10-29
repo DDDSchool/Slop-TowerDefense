@@ -14,7 +14,6 @@ public class TowerMangeren : MonoBehaviour
     {
         public Button button;
         public TowerConfigs tower;
-        public RawImage image;
         public TextMeshProUGUI cost;
     }
 
@@ -22,7 +21,7 @@ public class TowerMangeren : MonoBehaviour
     private class TowerUpgradeGui
     {
         public GameObject frame;
-        public RawImage showcase;
+        public Image showcase;
         public TextMeshProUGUI name;
         public TextMeshProUGUI stats;
         public TextMeshProUGUI buttonText;
@@ -40,6 +39,7 @@ public class TowerMangeren : MonoBehaviour
     [Header("Canvas Settings")]
     [SerializeField] private TowerSelectButtonConfigs[] towerSelectButtons;
     [SerializeField] private TowerUpgradeGui upgradeGui;
+    [SerializeField] private TextMeshProUGUI speedText;
 
     [Header("other...")]
     [SerializeField] private GameObject rangeRadiusExample;
@@ -75,8 +75,6 @@ public class TowerMangeren : MonoBehaviour
             info.button.onClick.AddListener(() => SelectPlaceTower(info.tower));
             
             GameObject level1Tower = info.tower.towerlevels[1].tower;
-            Texture2D sprite = PrefabUtility.GetIconForGameObject(level1Tower);
-            info.image.texture = sprite;
             info.cost.text = $"{info.tower.towerlevels[1].cost}";
         }
 
@@ -105,7 +103,9 @@ public class TowerMangeren : MonoBehaviour
     //hardcoded ye
     public void ToggleSpeed()
     {
-        Time.timeScale = Time.timeScale == 1? 2 : 1;
+        int newTimeScale = Time.timeScale == 1? 2 : 1;
+        Time.timeScale = newTimeScale;
+        speedText.text = $"{newTimeScale}x";
     }
 
     #region Placing/Moving Towers
@@ -191,8 +191,7 @@ public class TowerMangeren : MonoBehaviour
 
         upgradeGui.stats.text = tower.GetStatsInfo();
         upgradeGui.name.text = configs.towerName;
-        Texture2D sprite = PrefabUtility.GetIconForGameObject(tower.gameObject);
-        upgradeGui.showcase.texture = sprite;
+        upgradeGui.showcase.sprite = configs.icon;
         upgradeGui.frame.SetActive(true);
 
         //get next level value for showcase

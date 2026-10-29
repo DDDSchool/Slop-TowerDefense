@@ -15,6 +15,7 @@ public class TowerConfigs : ScriptableObject
 
     [Header("Standert")]
     public string towerName = "Untitled";
+    public Sprite icon;
     
     [Header("Level configs")]
     [SerializeField] private TowerLevelConfigs[] towerLevelConfigs;
