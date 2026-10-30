@@ -2537,6 +2537,7 @@ GameObject:
   - component: {fileID: 1233743507}
   - component: {fileID: 1233743506}
   - component: {fileID: 1233743505}
+  - component: {fileID: 1233743509}
   m_Layer: 5
   m_Name: Gamemenu
   m_TagString: Untagged
@@ -2632,6 +2633,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1233743509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233743504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfd000880859ec84b82a3fe92d9025be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InGameManager
+  currency: 0
+  health: 100
+  healthText: {fileID: 945266631}
+  currencyText: {fileID: 1637487576}
 --- !u!1 &1267981319
 GameObject:
   m_ObjectHideFlags: 0

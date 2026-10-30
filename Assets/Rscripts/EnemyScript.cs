@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour {
@@ -5,6 +6,11 @@ public class Enemy : MonoBehaviour {
     public int reward = 10;
     private int index = 0;
     public int health = 10;
+
+    void Start()
+    {
+        StartCoroutine(WaitUntilDead());
+    }
 
     void Update() 
     {
@@ -19,9 +25,17 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    IEnumerator WaitUntilDead()
+    {
+        yield return new WaitUntil(() => health <= 0);
+
+        InGameManager.instance.AddCurrency(reward);
+        Destroy(gameObject);
+    }
+
     void ReachedEnd() 
     {
-        //life -1
+        InGameManager.instance.DamageTower(health);
         Destroy(gameObject);
     }
 }

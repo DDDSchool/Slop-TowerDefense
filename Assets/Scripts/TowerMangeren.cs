@@ -130,8 +130,9 @@ public class TowerMangeren : MonoBehaviour
         color.a = overlapAlpha;
         rangeRadiusObject.color = color;
         if (!OnMouseWorldClick()) return;
-
+        
         selectState = SelectState.none;
+        InGameManager.instance.AddCurrency(-selectedPlacingTowerScript.towerConfigs.towerlevels[1].cost);
         selectedPlacingTowerScript.enabled = true;
         selectedPlacingTowerScript = null;
         selectedPlacingTowerCollider.enabled = true;
@@ -151,6 +152,9 @@ public class TowerMangeren : MonoBehaviour
             selectedPlacingTowerScript = null;
         }
         if (selectState == SelectState.placing && tower == selectedPlacingTowerScript) {selectState = SelectState.none; return;}
+        
+        int cost = tower.towerlevels[1].cost;
+        if (InGameManager.instance.currency < cost) return;
 
         selectState = SelectState.placing;
         selectedPlacingTowerConfig = tower;
@@ -220,6 +224,10 @@ public class TowerMangeren : MonoBehaviour
     void UpgradeTower(Tower tower)
     {
         TowerConfigs configs = tower.towerConfigs;
+        int cost = configs.towerlevels[tower.level + 1].cost;
+        if (InGameManager.instance.currency < cost) return;
+
+        InGameManager.instance.AddCurrency(-cost);
         GameObject newObject = configs.towerlevels[tower.level + 1].tower;
         Vector3 spawnPosition = tower.transform.position;
         Destroy(tower.gameObject);
