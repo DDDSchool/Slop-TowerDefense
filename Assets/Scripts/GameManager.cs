@@ -5,7 +5,7 @@ public class GameManager
 {
     static TowerConfigs[] towerConfigs = Resources.LoadAll<TowerConfigs>("TowerInfo");
     
-    [InitializeOnLoadMethod]
+    [RuntimeInitializeOnLoadMethod]
     static void Init()
     {
         foreach (TowerConfigs towerInfo in towerConfigs)

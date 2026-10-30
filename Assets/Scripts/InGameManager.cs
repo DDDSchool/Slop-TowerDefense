@@ -15,7 +15,7 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI currencyText;
     [SerializeField] private TextMeshProUGUI roundText;
 
-    const string startScene = "";
+    const string startScene = "Startschrem";
 
     void Awake()
     {

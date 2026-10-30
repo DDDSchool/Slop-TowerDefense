@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Startschrem : MonoBehaviour
 {
-    private string gameName = "";
+    private string gameName = "the Game";
 
     public void Startgame()
     {

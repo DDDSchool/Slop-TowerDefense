@@ -130,14 +130,15 @@ public class Tower : MonoBehaviour
         if (succes)
         {
             Tower newTower = levelConfigs.tower.GetComponent<Tower>(); //for now;
-            string statsInfo = $"Damage: {damage} > {newTower.damage}\n Range: {range} > {newTower.range}\n AttackSpeed: {attackSpeed} > {newTower.attackSpeed}";
+            string statsInfo = $"Damage: {damage} > {newTower.damage}\n Range: {range} > {newTower.range}\n AttackSpeed: {attackSpeed} > {newTower.attackSpeed}\n Pierces: {Piercing} > {newTower.Piercing}";
             return statsInfo;
         }
 
-        string maxStatsInfo = $"Damage: {damage} > {damage}\n Range: {range} > {range}\n AttackSpeed: {attackSpeed} > {attackSpeed}";
+        string maxStatsInfo = $"Damage: {damage} > {damage}\n Range: {range} > {range}\n AttackSpeed: {attackSpeed} > {attackSpeed}\n Pierces: {Piercing} > {Piercing}";
         return maxStatsInfo;
     }
 
+    #if UNITY_EDITOR
     protected void OnDrawGizmos()
     {
         if (range == 0) return;
@@ -147,4 +148,5 @@ public class Tower : MonoBehaviour
         Handles.color = hitboxColor;
         Handles.DrawSolidDisc(new Vector3(transform.position.x, enemieCheckYPos, transform.position.z), Vector3.up, range);
     }
+    #endif
 }

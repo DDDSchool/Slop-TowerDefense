@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 194976717775866537}
   - component: {fileID: 5057407839338339319}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Audio Source (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,6 +197,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: tower lvl4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44de6b60fc938d44e87da013b33d3ef1, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 44de6b60fc938d44e87da013b33d3ef1, type: 3}
+      propertyPath: m_TagString
+      value: Tower
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -236,10 +244,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46f2c4a9723c1f4eb781b1f90903834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerCannon
-  level: 1
-  damage: 2
-  range: 5
-  attackSpeed: 2
+  level: 4
+  damage: 4
+  range: 6.2
+  attackSpeed: 3
   projectileSpeed: 20
   Piercing: 1
   shootPivit: {fileID: 2848381838514592443}
@@ -250,7 +258,7 @@ MonoBehaviour:
   hitSfx: {fileID: 8300000, guid: 2205b9e132f7dc44492f6234a7c4ac40, type: 3}
   fightMode: 4
   towerConfigs: {fileID: 0}
-  aoeRadius: 2
+  aoeRadius: 3
   explosionVfx: {fileID: 1994885275701328011, guid: 97ab2f08f1bd4774188e16187c405ff1, type: 3}
 --- !u!65 &4736554065505752114
 BoxCollider:
@@ -337,9 +345,21 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -8380157826906577798, guid: cbeac035cf145d84ab62d2bbf0fffe3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -7146521406498821007, guid: cbeac035cf145d84ab62d2bbf0fffe3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: cbeac035cf145d84ab62d2bbf0fffe3c, type: 3}
       propertyPath: m_Name
       value: Tower Cannon fix (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cbeac035cf145d84ab62d2bbf0fffe3c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

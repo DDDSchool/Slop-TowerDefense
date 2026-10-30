@@ -60,7 +60,7 @@ public class TowerMangeren : MonoBehaviour
     private GameObject selectedUpgradeTower = null;
 
     //configs
-    const float mouseRayDis = 10f;
+    const float mouseRayDis = 20f;
     const float placingDownYPosition = .5f;
     const float overlapAlpha = .4f;
     const string towerTag = "Tower";

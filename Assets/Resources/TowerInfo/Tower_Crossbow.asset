@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ef459893551ad4999783a246667158, type: 3}
+  m_Name: Tower_Crossbow
+  m_EditorClassIdentifier: Assembly-CSharp::TowerConfigs
+  towerName: Crossbow
+  icon: {fileID: 21300000, guid: 03f00e9565b16ba419c227d6f824421f, type: 3}
+  towerLevelConfigs:
+  - level: 1
+    cost: 20
+    tower: {fileID: 6506283417530569341, guid: 52f87596403bc2b4e8684fbb3c2451b0, type: 3}
+  - level: 2
+    cost: 40
+    tower: {fileID: 1698327225419206429, guid: 84d48a8d3c4a34d49b8d53a341789ff1, type: 3}
+  - level: 3
+    cost: 100
+    tower: {fileID: 4633516100069066087, guid: 24b82efa33ffe61489c095d99cf40c47, type: 3}
+  - level: 4
+    cost: 150
+    tower: {fileID: 2682906375298076781, guid: 20590d5f48da902448215f376b8e5462, type: 3}
+  - level: 5
+    cost: 200
+    tower: {fileID: 8364617294642906067, guid: 9444b770dd5e58843879379331cace1a, type: 3}
+  - level: 6
+    cost: 350
+    tower: {fileID: 5433017677234524902, guid: fc27be50c66e29840a23d13d5e309b68, type: 3}
