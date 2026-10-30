@@ -362,7 +362,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa4c8bb0fc416e847a2206fd7bd0c285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
-  enemyPrefab: {fileID: 6005184515190174107, guid: e56f860537fa78842b7a7fe80c6a313e, type: 3}
+  enemyPrefab: {fileID: 760005154820636012, guid: 57e5fbf775208a948be244650f9d2d61, type: 3}
+  enemyTwo: {fileID: 1437815246279742365, guid: 4845a5e8104a75944bc075690d458d49, type: 3}
+  enemyThree: {fileID: 3888626413931822025, guid: 47e8e3fe167ca20499f7c850fe031973, type: 3}
   spawnPoint: {fileID: 1952739093}
   timeBetweenEnemies: 0.5
   timeBetweenWaves: 2
@@ -2647,8 +2649,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InGameManager
   currency: 0
   health: 100
+  currentRound: 1
   healthText: {fileID: 945266631}
   currencyText: {fileID: 1637487576}
+  roundText: {fileID: 1472208869}
 --- !u!1 &1267981319
 GameObject:
   m_ObjectHideFlags: 0

@@ -64,7 +64,7 @@ public class TowerMangeren : MonoBehaviour
     const float placingDownYPosition = .5f;
     const float overlapAlpha = .4f;
     const string towerTag = "Tower";
-    const int maxTowerLevel = 3;
+    const int maxTowerLevel = 6;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

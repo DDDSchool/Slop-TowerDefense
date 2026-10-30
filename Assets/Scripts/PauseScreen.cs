@@ -1,13 +1,10 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PauseScreen : MonoBehaviour
 {
     private bool isPaused = false;
     private float oldTimeScale = 1;
     private Canvas canvas;
-
-    const string startScene = "";
 
     void Start()
     {
@@ -33,7 +30,6 @@ public class PauseScreen : MonoBehaviour
 
     public void Quit()
     {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(startScene);
+        InGameManager.instance.Quit();
     }
 }

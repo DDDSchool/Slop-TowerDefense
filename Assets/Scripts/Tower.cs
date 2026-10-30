@@ -75,7 +75,22 @@ public class Tower : MonoBehaviour
         attackCurrentCooldown = 0;
 
         int randomEnemie = UnityEngine.Random.Range(0, hits.Length);
-        Transform enemyTarget = hits[randomEnemie].transform;
+
+        //get the closest enemie to goal
+        Transform enemyTarget = hits[0].transform; //default
+        float closet = float.MinValue;
+
+        foreach (Collider hit in hits)
+        {
+            float dis = hit.GetComponent<Enemy>().DistanceLeft();
+
+            if (closet < dis)
+            {
+                closet = dis;
+                enemyTarget = hit.transform;
+            }
+        }
+
         FireProjectile(enemyTarget);
     }
 

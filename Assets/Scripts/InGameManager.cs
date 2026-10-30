@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InGameManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class InGameManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI currencyText;
     [SerializeField] private TextMeshProUGUI roundText;
+
+    const string startScene = "";
 
     void Awake()
     {
@@ -37,6 +40,8 @@ public class InGameManager : MonoBehaviour
     {
         health -= damage;
         healthText.text = $"{health}";
+
+        if (health <= 0) Quit();
     }
 
     public void AddCurrency(int totale)
@@ -49,5 +54,11 @@ public class InGameManager : MonoBehaviour
     {
         currentRound += totale;
         roundText.text = $"Round: {currentRound}";
+    }
+
+    public void Quit()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(startScene);
     }
 }
